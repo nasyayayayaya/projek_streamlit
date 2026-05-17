@@ -179,7 +179,7 @@ if menu == "Admin":
 
     if st.button("Simpan Produk"):
 
-    image_url = ""
+image_url = ""
 
     if gambar is not None:
 
