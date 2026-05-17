@@ -9,7 +9,7 @@ st.set_page_config(page_title="Toko Hijab", layout="wide")
 url = "sb_publishable_iHrD_ulHIO35sbK5fVDM3w_Bs4Zlkmf"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlva3dtbnd0dHB1YXBwaWxydWNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMjA3NTAsImV4cCI6MjA5NDU5Njc1MH0.PDvsxatgkSK0pl_6KG-b5mOLGG5M2je3JsLOv5yHp0Q"
 
-supabase = create_client(sb_publishable_iHrD_ulHIO35sbK5fVDM3w_Bs4Zlkmf,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlva3dtbnd0dHB1YXBwaWxydWNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMjA3NTAsImV4cCI6MjA5NDU5Njc1MH0.PDvsxatgkSK0pl_6KG-b5mOLGG5M2je3JsLOv5yHp0Q)
+supabase = create_client(url, key)
 
 # =========================
 # SETUP
