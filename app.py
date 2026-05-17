@@ -51,7 +51,7 @@ if menu == "Belanja":
 
 data = supabase.table("produk").select("*").execute().data
 
-    if data:
+if data:
 
         cols = st.columns(3)
 
