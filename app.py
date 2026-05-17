@@ -96,7 +96,7 @@ alamat = st.text_area("Alamat")
 c.execute("SELECT id, nama, harga, stok FROM produk")
 produk = c.fetchall()
 
-    if produk:
+if produk:
         pilihan = st.selectbox("Pilih Produk", produk,
                                format_func=lambda x: f"{x[1]} (Stok: {x[3]})")
 
