@@ -86,8 +86,8 @@ st.write(f"💰 Rp{d['harga']}")
 st.write(f"📦 Stok: {d['stok']}")
 st.image(d["gambar"], use_container_width=True)
 
-    st.divider()
-    st.subheader("🛍️ Form Pembelian")
+st.divider()
+st.subheader("🛍️ Form Pembelian")
 
     nama = st.text_input("Nama")
     no_hp = st.text_input("No HP")
