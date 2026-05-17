@@ -166,31 +166,36 @@ if menu == "Admin":
 
         st.success("Login berhasil")
 
-        st.subheader("Tambah Produk")
+       st.subheader("Tambah Produk")
 
-        nama = st.text_input("Nama Produk")
-        harga = st.number_input("Harga", min_value=0)
-        stok = st.number_input("Stok", min_value=0)
+nama = st.text_input("Nama Produk")
 
-    gambar = st.file_uploader(
-    "Upload Gambar",
-    type=["jpg", "png", "jpeg"]
+harga = st.number_input(
+    "Harga",
+    min_value=0
 )
 
-    if st.button("Simpan Produk"):
+stok = st.number_input(
+    "Stok",
+    min_value=0
+)
 
-image_url = ""
+gambar = st.selectbox(
+    "Pilih Gambar",
+    [
+        "Bergo Pet Tipis.jpg",
+        "Ciput Bandana 2 Warna.jpg",
+        "Ciput Bandana Rajut.jpg",
+        "Hijab Renang.jpg",
+        "Jilbab Anak.jpg",
+        "Pashmina Cashmere.jpg",
+        "Pashmina Shawl.jpg"
+    ]
+)
 
-    if gambar is not None:
+if st.button("Simpan Produk"):
 
-        file_name = gambar.name
-
-        supabase.storage.from_("produk").upload(
-            file_name,
-            gambar.getvalue()
-        )
-
-        image_url = supabase.storage.from_("produk").get_public_url(file_name)
+    image_url = supabase.storage.from_("produk").get_public_url(gambar)
 
     supabase.table("produk").insert({
         "nama": nama,
