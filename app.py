@@ -1,4 +1,7 @@
 import streamlit as st
+import os
+
+from supabase import create_client
 
 st.set_page_config(page_title="Toko Hijab", layout="wide")
 
