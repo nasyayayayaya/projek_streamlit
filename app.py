@@ -49,7 +49,7 @@ if menu == "Belanja":
 
     st.title("🧕 WOW Hijab")
 
-    data = supabase.table("produk").select("*").execute().data
+data = supabase.table("produk").select("*").execute().data
 
     if data:
 
