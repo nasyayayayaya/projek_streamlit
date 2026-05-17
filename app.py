@@ -146,7 +146,7 @@ else:
 # =========================
 # ADMIN
 # =========================
-elif menu == "Admin":
+if menu == "Admin":
 
     if not st.session_state.admin_login:
         st.title("🔐 Login Admin")
