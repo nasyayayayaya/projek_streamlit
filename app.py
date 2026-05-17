@@ -68,6 +68,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown(
+    "<p style='text-align:center;'>Follow Us @WOWHijab</p>",
+    unsafe_allow_html=True
+)
+
 # =========================
 # MENU
 # =========================
