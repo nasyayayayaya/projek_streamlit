@@ -23,46 +23,6 @@ if not os.path.exists("images"):
     os.makedirs("images")
 
 # =========================
-# DATABASE
-# =========================
-c.execute('''
-CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,
-    password TEXT
-)
-''')
-
-c.execute('''
-CREATE TABLE IF NOT EXISTS produk (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nama TEXT,
-    harga INTEGER,
-    stok INTEGER,
-    gambar TEXT
-)
-''')
-
-c.execute('''
-CREATE TABLE IF NOT EXISTS transaksi (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nama TEXT,
-    no_hp TEXT,
-    alamat TEXT,
-    produk TEXT,
-    jumlah INTEGER,
-    total INTEGER,
-    bukti TEXT
-)
-''')
-
-# akun admin default
-c.execute("SELECT * FROM users WHERE username='admin'")
-if not c.fetchone():
-    c.execute("INSERT INTO users (username,password) VALUES ('admin','123')")
-    conn.commit()
-
-# =========================
 # SESSION LOGIN ADMIN
 # =========================
 if "admin_login" not in st.session_state:
