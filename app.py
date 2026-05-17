@@ -93,8 +93,8 @@ nama = st.text_input("Nama")
 no_hp = st.text_input("No HP")
 alamat = st.text_area("Alamat")
 
-    c.execute("SELECT id, nama, harga, stok FROM produk")
-    produk = c.fetchall()
+c.execute("SELECT id, nama, harga, stok FROM produk")
+produk = c.fetchall()
 
     if produk:
         pilihan = st.selectbox("Pilih Produk", produk,
