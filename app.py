@@ -140,8 +140,8 @@ if produk:
                     st.write(f"Produk: {nama_produk}")
                     st.write(f"Jumlah: {jumlah}")
                     st.write(f"Total: Rp{total}")
-    else:
-        st.warning("Belum ada produk")
+else:
+    st.warning("Belum ada produk")
 
 # =========================
 # ADMIN
