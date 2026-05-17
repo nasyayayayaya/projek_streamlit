@@ -172,7 +172,7 @@ if menu == "Admin":
         harga = st.number_input("Harga", min_value=0)
         stok = st.number_input("Stok", min_value=0)
 
-       gambar = st.file_uploader(
+    gambar = st.file_uploader(
     "Upload Gambar",
     type=["jpg", "png", "jpeg"]
 )
