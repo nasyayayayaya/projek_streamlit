@@ -172,17 +172,31 @@ if menu == "Admin":
         harga = st.number_input("Harga", min_value=0)
         stok = st.number_input("Stok", min_value=0)
 
-        gambar = st.text_input(
-            "Link Gambar Produk"
+       gambar = st.file_uploader(
+    "Upload Gambar",
+    type=["jpg", "png", "jpeg"]
+)
+
+       if st.button("Simpan Produk"):
+
+    image_url = ""
+
+    if gambar is not None:
+
+        file_name = gambar.name
+
+        supabase.storage.from_("produk").upload(
+            file_name,
+            gambar.getvalue()
         )
 
-        if st.button("Tambah Produk"):
+        image_url = supabase.storage.from_("produk").get_public_url(file_name)
 
-            supabase.table("produk").insert({
-                "nama": nama,
-                "harga": harga,
-                "stok": stok,
-                "gambar": gambar
-            }).execute()
+    supabase.table("produk").insert({
+        "nama": nama,
+        "harga": harga,
+        "stok": stok,
+        "gambar": image_url
+    }).execute()
 
-            st.success("Produk berhasil ditambahkan")
+    st.success("Produk berhasil ditambahkan!")
