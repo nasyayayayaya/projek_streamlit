@@ -1,15 +1,21 @@
 import streamlit as st
-import sqlite3
-import os
 
 st.set_page_config(page_title="Toko Hijab", layout="wide")
 
 # =========================
+# SUPABASE
+# =========================
+
+url = "sb_publishable_iHrD_ulHIO35sbK5fVDM3w_Bs4Zlkmf"
+key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlva3dtbnd0dHB1YXBwaWxydWNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMjA3NTAsImV4cCI6MjA5NDU5Njc1MH0.PDvsxatgkSK0pl_6KG-b5mOLGG5M2je3JsLOv5yHp0Q
+
+supabase = create_client(sb_publishable_iHrD_ulHIO35sbK5fVDM3w_Bs4Zlkmf,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlva3dtbnd0dHB1YXBwaWxydWNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMjA3NTAsImV4cCI6MjA5NDU5Njc1MH0.PDvsxatgkSK0pl_6KG-b5mOLGG5M2je3JsLOv5yHp0Q)
+
+# =========================
 # SETUP
 # =========================
-conn = sqlite3.connect('hijab.db', check_same_thread=False)
-c = conn.cursor()
 
+from supabase import create_client
 if not os.path.exists("images"):
     os.makedirs("images")
 
@@ -67,8 +73,7 @@ menu = st.sidebar.selectbox("Menu", ["Belanja", "Admin"])
 if menu == "Belanja":
     st.title("WOW Hijab")
 
-    c.execute("SELECT * FROM produk")
-    data = c.fetchall()
+    data = supabase.table("produk").select("*").execute().data
 
     cols = st.columns(3)
 
@@ -76,9 +81,10 @@ if menu == "Belanja":
         with cols[i % 3]:
             if d[4]:
                 st.image(d[4], use_container_width=True)
-            st.markdown(f"### {d[1]}")
-            st.write(f"💰 Rp{d[2]}")
-            st.write(f"Stok: {d[3]}")
+            st.markdown(f"### {d['nama']}")
+st.write(f"💰 Rp{d['harga']}")
+st.write(f"📦 Stok: {d['stok']}")
+st.image(d["gambar"], use_container_width=True)
 
     st.divider()
     st.subheader("🛍️ Form Pembelian")
@@ -178,9 +184,12 @@ elif menu == "Admin":
                 with open(path, "wb") as f:
                     f.write(gambar.getbuffer())
 
-            c.execute("INSERT INTO produk (nama,harga,stok,gambar) VALUES (?,?,?,?)",
-                      (nama,harga,stok,path))
-            conn.commit()
+            supabase.table("produk").insert({
+    "nama": nama,
+    "harga": harga,
+    "stok": stok,
+    "gambar": path
+}).execute()
             st.success("Produk ditambahkan!")
 
         st.subheader("📦 Data Produk")
