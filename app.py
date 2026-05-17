@@ -157,51 +157,96 @@ if menu == "Belanja":
 
 if menu == "Admin":
 
-    st.header("🔐 Login Admin")
+    if not st.session_state.admin_login:
 
-    user = st.text_input("Username")
-    pw = st.text_input("Password", type="password")
+        st.title("🔐 Login Admin")
 
-    if user == "admin" and pw == "123":
+        user = st.text_input("Username")
+        pw = st.text_input("Password", type="password")
 
-        st.success("Login berhasil")
+        if st.button("Login"):
+
+            if user == "admin" and pw == "123":
+
+                st.session_state.admin_login = True
+
+                st.success("Login berhasil!")
+
+                st.rerun()
+
+            else:
+                st.error("Username atau password salah")
+
+    else:
+
+        st.title("🧣 Dashboard Admin")
+
+        if st.button("Logout"):
+
+            st.session_state.admin_login = False
+
+            st.rerun()
+
+        # =========================
+        # TAMBAH PRODUK
+        # =========================
 
         st.subheader("Tambah Produk")
 
-nama = st.text_input("Nama Produk")
+        nama = st.text_input("Nama Produk")
 
-harga = st.number_input(
-    "Harga",
-    min_value=0
-)
+        harga = st.number_input(
+            "Harga",
+            min_value=0
+        )
 
-stok = st.number_input(
-    "Stok",
-    min_value=0
-)
+        stok = st.number_input(
+            "Stok",
+            min_value=0
+        )
 
-gambar = st.selectbox(
-    "Pilih Gambar",
-    [
-        "Bergo Pet Tipis.jpg",
-        "Ciput Bandana 2 Warna.jpg",
-        "Ciput Bandana Rajut.jpg",
-        "Hijab Renang.jpg",
-        "Jilbab Anak.jpg",
-        "Pashmina Cashmere.jpg",
-        "Pashmina Shawl.jpg"
-    ]
-)
+        gambar = st.selectbox(
+            "Pilih Gambar",
+            [
+                "Bergo Pet Tipis.jpg",
+                "Ciput Bandana 2 Warna.jpg",
+                "Ciput Bandana Rajut.jpg",
+                "Hijab Renang.jpg",
+                "Jilbab Anak.jpg",
+                "Pashmina Cashmere.jpg",
+                "Pashmina Shawl.jpg"
+            ]
+        )
 
-if st.button("Simpan Produk"):
+        if st.button("Simpan Produk"):
 
-    image_url = supabase.storage.from_("produk").get_public_url(gambar)
+            image_url = supabase.storage.from_("produk").get_public_url(gambar)
 
-    supabase.table("produk").insert({
-        "nama": nama,
-        "harga": harga,
-        "stok": stok,
-        "gambar": image_url
-    }).execute()
+            supabase.table("produk").insert({
+                "nama": nama,
+                "harga": harga,
+                "stok": stok,
+                "gambar": image_url
+            }).execute()
 
-    st.success("Produk berhasil ditambahkan!")
+            st.success("Produk berhasil ditambahkan!")
+
+        # =========================
+        # DATA PRODUK
+        # =========================
+
+        st.subheader("📦 Data Produk")
+
+        data = supabase.table("produk").select("*").execute().data
+
+        for d in data:
+
+            if d["gambar"]:
+                st.image(
+                    d["gambar"],
+                    width=150
+                )
+
+            st.write(
+                f"{d['nama']} | Rp{d['harga']} | Stok: {d['stok']}"
+            )
