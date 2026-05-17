@@ -248,11 +248,28 @@ if menu == "Admin":
 
         for d in data:
 
+            st.markdown("---")
+
             if d["gambar"]:
                 st.image(
                     d["gambar"],
                     width=150
                 )
+
+            st.write(f"Nama: {d['nama']}")
+            st.write(f"Harga: Rp{d['harga']}")
+            st.write(f"Stok: {d['stok']}")
+
+            if st.button(f"❌ Hapus Produk {d['id']}"):
+
+                supabase.table("produk").delete().eq(
+                    "id",
+                    d["id"]
+                ).execute()
+
+                st.success("Produk berhasil dihapus!")
+
+                st.rerun()
 
             st.write(
                 f"{d['nama']} | Rp{d['harga']} | Stok: {d['stok']}"
