@@ -54,7 +54,7 @@ st.markdown("""
 # =========================
 
 st.image(
-    "banner.jpg",
+    "banner.png",
     use_container_width=True
 )
 
