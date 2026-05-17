@@ -16,7 +16,7 @@ st.set_page_config(
 
 url = "https://iokwmnwttpuappilrucs.supabase.co"
 
-key = "API_KEY_KAMU"
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlva3dtbnd0dHB1YXBwaWxydWNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMjA3NTAsImV4cCI6MjA5NDU5Njc1MH0.PDvsxatgkSK0pl_6KG-b5mOLGG5M2je3JsLOv5yHp0Q"
 
 supabase = create_client(url, key)
 
@@ -59,12 +59,12 @@ st.image(
 )
 
 st.markdown(
-    "<h1 style='text-align:center; color:pink;'>🧕 WOW Hijab</h1>",
+    "<h1 style='text-align:center; color:pink;'>🧣 WOW Hijab</h1>",
     unsafe_allow_html=True
 )
 
 st.markdown(
-    "<p style='text-align:center;'>Hijab Cantik, Stylish, dan Kekinian ✨</p>",
+    "<p style='text-align:center;'>Hijab Cantik, Lucu, dan Imut 🎀</p>",
     unsafe_allow_html=True
 )
 
