@@ -147,3 +147,39 @@ Alamat: {alamat}
 Pesanan: {pesanan}
 Jumlah: {jumlah}
 """)
+        
+# =========================
+# LOGIN ADMIN
+# =========================
+
+st.divider()
+
+st.header("🔐 Admin")
+
+user = st.text_input("Username")
+pw = st.text_input("Password", type="password")
+
+if user == "admin" and pw == "123":
+
+    st.success("Login berhasil")
+
+    st.subheader("Tambah Produk")
+
+    nama = st.text_input("Nama Produk")
+    harga = st.number_input("Harga", min_value=0)
+    stok = st.number_input("Stok", min_value=0)
+
+    gambar = st.text_input(
+        "Link Gambar Produk"
+    )
+
+    if st.button("Tambah Produk"):
+
+        supabase.table("produk").insert({
+            "nama": nama,
+            "harga": harga,
+            "stok": stok,
+            "gambar": gambar
+        }).execute()
+
+        st.success("Produk berhasil ditambahkan")
