@@ -69,7 +69,7 @@ if data:
                 st.write(f"💰 Rp{d['harga']}")
                 st.write(f"📦 Stok: {d['stok']}")
 
-    else:
+else:
         st.warning("Belum ada produk")
 
 # =========================
