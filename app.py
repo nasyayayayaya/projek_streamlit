@@ -69,117 +69,120 @@ st.markdown(
 )
 
 # =========================
-# PRODUK
+# MENU
 # =========================
 
-st.header("Produk Kami")
+menu = st.sidebar.selectbox(
+    "Menu",
+    ["Belanja", "Admin"]
+)
 
-try:
-    response = supabase.table("produk").select("*").execute()
-    data = response.data
+# =========================
+# BELANJA
+# =========================
 
-except Exception as e:
-    st.error(e)
-    data = []
+if menu == "Belanja":
 
-if data:
+    st.header("Produk Kami")
 
-    cols = st.columns(3)
+    try:
+        response = supabase.table("produk").select("*").execute()
+        data = response.data
 
-    for i, d in enumerate(data):
+    except Exception as e:
+        st.error(e)
+        data = []
 
-        with cols[i % 3]:
+    if data:
 
-            st.markdown(
-                '<div class="card">',
-                unsafe_allow_html=True
-            )
+        cols = st.columns(3)
 
-            if d["gambar"]:
-                st.image(
-                    d["gambar"],
-                    use_container_width=True
+        for i, d in enumerate(data):
+
+            with cols[i % 3]:
+
+                st.markdown(
+                    '<div class="card">',
+                    unsafe_allow_html=True
                 )
 
-            st.subheader(d["nama"])
-            st.write(f"💰 Rp{d['harga']}")
-            st.write(f"📦 Stok: {d['stok']}")
+                if d["gambar"]:
+                    st.image(
+                        d["gambar"],
+                        use_container_width=True
+                    )
 
-            st.markdown(
-                "</div>",
-                unsafe_allow_html=True
-            )
+                st.subheader(d["nama"])
+                st.write(f"💰 Rp{d['harga']}")
+                st.write(f"📦 Stok: {d['stok']}")
 
-else:
-    st.warning("Belum ada produk")
+                st.markdown(
+                    "</div>",
+                    unsafe_allow_html=True
+                )
 
-# =========================
-# FORM ORDER
-# =========================
+    else:
+        st.warning("Belum ada produk")
 
-st.header("🛒 Form Order")
+    # =========================
+    # FORM ORDER
+    # =========================
 
-with st.form("form_order"):
+    st.header("🛒 Form Order")
 
-    nama = st.text_input("Nama")
-    nohp = st.text_input("No HP")
-    alamat = st.text_area("Alamat")
-    pesanan = st.text_input("Pesanan")
+    with st.form("form_order"):
 
-    jumlah = st.number_input(
-        "Jumlah",
-        min_value=1,
-        step=1
-    )
+        nama = st.text_input("Nama")
+        nohp = st.text_input("No HP")
+        alamat = st.text_area("Alamat")
+        pesanan = st.text_input("Pesanan")
 
-    submit = st.form_submit_button(
-        "Pesan Sekarang"
-    )
+        jumlah = st.number_input(
+            "Jumlah",
+            min_value=1,
+            step=1
+        )
 
-    if submit:
+        submit = st.form_submit_button(
+            "Pesan Sekarang"
+        )
 
-        st.success(f"""
-Pesanan berhasil dibuat 🎉
+        if submit:
 
-Nama: {nama}
-No HP: {nohp}
-Alamat: {alamat}
-Pesanan: {pesanan}
-Jumlah: {jumlah}
-""")
+            st.success("Pesanan berhasil dibuat 🎉")
         
 # =========================
-# LOGIN ADMIN
+# ADMIN
 # =========================
 
-st.divider()
+if menu == "Admin":
 
-st.header("🔐 Admin")
+    st.header("🔐 Login Admin")
 
-user = st.text_input("Username")
-pw = st.text_input("Password", type="password")
+    user = st.text_input("Username")
+    pw = st.text_input("Password", type="password")
 
-if user == "admin" and pw == "123":
+    if user == "admin" and pw == "123":
 
-    st.success("Login berhasil")
+        st.success("Login berhasil")
 
-    st.subheader("Tambah Produk")
+        st.subheader("Tambah Produk")
 
-    nama = st.text_input("Nama Produk")
-    harga = st.number_input("Harga", min_value=0)
-    stok = st.number_input("Stok", min_value=0)
+        nama = st.text_input("Nama Produk")
+        harga = st.number_input("Harga", min_value=0)
+        stok = st.number_input("Stok", min_value=0)
 
-    gambar = st.text_input(
-        "Link Gambar Produk"
-    )
+        gambar = st.text_input(
+            "Link Gambar Produk"
+        )
 
-    if st.button("Tambah Produk"):
+        if st.button("Tambah Produk"):
 
-        supabase.table("produk").insert({
-            "nama": nama,
-            "harga": harga,
-            "stok": stok,
-            "gambar": gambar
-        }).execute()
+            supabase.table("produk").insert({
+                "nama": nama,
+                "harga": harga,
+                "stok": stok,
+                "gambar": gambar
+            }).execute()
 
-        st.success("Produk berhasil ditambahkan")
+            st.success("Produk berhasil ditambahkan")
