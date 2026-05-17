@@ -89,9 +89,9 @@ st.image(d["gambar"], use_container_width=True)
 st.divider()
 st.subheader("🛍️ Form Pembelian")
 
-    nama = st.text_input("Nama")
-    no_hp = st.text_input("No HP")
-    alamat = st.text_area("Alamat")
+nama = st.text_input("Nama")
+no_hp = st.text_input("No HP")
+alamat = st.text_area("Alamat")
 
     c.execute("SELECT id, nama, harga, stok FROM produk")
     produk = c.fetchall()
