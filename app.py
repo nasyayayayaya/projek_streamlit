@@ -155,6 +155,13 @@ if menu == "Belanja":
 # ADMIN
 # =========================
 
+# =========================
+# LOGIN SESSION
+# =========================
+
+if "admin_login" not in st.session_state:
+    st.session_state.admin_login = False
+
 if menu == "Admin":
 
     if not st.session_state.admin_login:
