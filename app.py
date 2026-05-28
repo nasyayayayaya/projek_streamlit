@@ -112,10 +112,16 @@ if menu == "Belanja":
                 )
 
                 if d["gambar"]:
-                    st.image(
-                        d["gambar"],
-                        use_container_width=True
-                    )
+
+                    try:
+                        st.image(
+                            d["gambar"],
+                            use_container_width=True
+                        )
+
+                    except:
+                        st.warning("gambar error 😭")
+                        st.write(d["gambar"])
 
                 st.subheader(d["nama"])
                 st.write(f"💰 Rp{d['harga']}")
