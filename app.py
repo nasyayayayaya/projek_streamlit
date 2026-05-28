@@ -262,10 +262,16 @@ if menu == "Admin":
             st.markdown("---")
 
             if d["gambar"]:
-                st.image(
-                    d["gambar"],
-                    width=150
-                )
+
+                try:
+                    st.image(
+                        d["gambar"],
+                        width=150
+                    )
+
+                except:
+                    st.warning("gambar error 😭")
+                    st.write(d["gambar"])
 
             st.write(f"Nama: {d['nama']}")
             st.write(f"Harga: Rp{d['harga']}")
