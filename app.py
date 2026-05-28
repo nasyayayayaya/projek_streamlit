@@ -232,7 +232,7 @@ if menu == "Admin":
 
         if st.button("Simpan Produk"):
 
-            image_url = supabase.storage.from_("produk").get_public_url(gambar)
+            image_url = supabase.storage.from_("produk").get_public_url(gambar)["publicUrl"]
 
             supabase.table("produk").insert({
                 "nama": nama,
